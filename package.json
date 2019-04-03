@@ -1,13 +1,14 @@
 {
   "name": "kCopy",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "description": "Clipboard management tool.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "build"
+    "dist": "electron-builder",
+    "publish": "electron-builder --publish always"
   },
-  "repository": "https://github.com/Maxx730/simpl-notes",
+  "repository": "https://github.com/Maxx730/kCopy",
   "author": "John Kinghorn",
   "license": "CC0-1.0",
   "devDependencies": {
@@ -28,20 +29,14 @@
     "uuid": "^3.3.2"
   },
   "build": {
-    "appId": "com.kinghorn.kcopy",
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
+    "appId": "com.github.maxx730.kcopy",
+    "productName" : "kCopy",
+    "mac": {
+        "category": "com.kinghorn.util",
+        "target": [
+          "zip",
+          "dmg"
+        ]
     },
     "linux": {
       "target": [

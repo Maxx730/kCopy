@@ -71,6 +71,10 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
     }]);
 })
 
+ipcRenderer.on('update-message',( event,args ) => {
+    document.getElementsByTagName('BODY')[0].innerHTML = " working "
+})
+
 ipcRenderer.on('data-imported',( event,args ) => {
     data = args;
     Toast.ShowToast( 'Clipboard Imported!',2500 )

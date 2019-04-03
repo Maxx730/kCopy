@@ -1,3 +1,5 @@
+process.env.GH_TOKEN="3d4495070d97e6d3dfd32298954f671ab4725629"
+
 const Files = require('./lib/data.js')
 const {app, BrowserWindow, ipcMain, globalShortcut, dialog } = require('electron')
 const clipboard = require('electron-clipboard-extended')
@@ -15,8 +17,6 @@ let data;
 let lastKey = 0;
 let fadeTimeout, shortcutIndex = 0;
 let dialogOpen = false;
-
-console.log( autoUpdater.checkForUpdatesAndNotify() )
 
 function createWindow ( data ) {
   mainWindow = new BrowserWindow({
@@ -100,7 +100,29 @@ ipcMain.on( 'apply-clipboard',(event,args) => {
     clipboard.writeText( args )
 })
 
+autoUpdater.on('checking-for-update', () => {
+    mainWindow.webContents.send('update-message','Checking for updates...')
+})
+autoUpdater.on('update-available', (info) => {
+    mainWindow.webContents.send('update-message','Update Available')
+})
+autoUpdater.on('update-not-available', (info) => {
+    
+})
+autoUpdater.on('error', (err) => {
+    mainWindow.webContents.send('update-message','Error Updating')
+})
+autoUpdater.on('download-progress', (progressObj) => {
+    mainWindow.webContents.send('update-message','Downloading...')
+})
+autoUpdater.on('update-downloaded', (info) => {
+    mainWindow.webContents.send('update-message','Update Ready!')
+});
+
 app.on('ready', () => {
+    //First check if there have been any updates before launching the application.
+    autoUpdater.checkForUpdatesAndNotify()
+
     Files.CheckForFile( 'data',( file ) => {
         createWindow( file );
         data = file;
