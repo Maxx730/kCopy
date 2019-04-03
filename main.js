@@ -33,6 +33,7 @@ mainWindow.loadFile('index.html')
   mainWindow.on('closed', function () {
     TrackEvent( user,'APPLICATION','CLOSED' )
     mainWindow = null
+    app.quit()
   })
 }
 
@@ -199,10 +200,6 @@ app.on('ready', () => {
     globalShortcut.register('CommandOrControl+Enter',() => {
       shortWindow.hide()
     })
-})
-
-app.on('window-all-closed', function () {
-    app.quit()
 })
 
 app.on('activate', function () {

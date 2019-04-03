@@ -30,13 +30,13 @@
   },
   "build": {
     "appId": "com.github.maxx730.kcopy",
-    "productName" : "kCopy",
+    "productName": "kCopy",
     "mac": {
-        "category": "com.kinghorn.util",
-        "target": [
-          "zip",
-          "dmg"
-        ]
+      "category": "com.kinghorn.util",
+      "target": [
+        "zip",
+        "dmg"
+      ]
     },
     "linux": {
       "target": [
