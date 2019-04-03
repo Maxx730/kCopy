@@ -5,6 +5,8 @@ const { toKeyEvent } = require('keyboardevent-from-electron-accelerator');
 const type = require('file-type')
 const buff = require('read-chunk')
 const ua = require('universal-analytics')
+const { autoUpdater } = require("electron-updater")
+
 let user;
 const { TrackEvent } = require('./lib/analytics.js')
 
@@ -14,11 +16,13 @@ let lastKey = 0;
 let fadeTimeout, shortcutIndex = 0;
 let dialogOpen = false;
 
+console.log( autoUpdater.checkForUpdatesAndNotify() )
 
 function createWindow ( data ) {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    titleBarStyle:'hidden',
     webPreferences: {
       nodeIntegration: true
     },
@@ -37,6 +41,7 @@ ipcMain.on( 'save-data',( event,args ) => {
         console.log("FILE SUCCESSFULLY SAVED!")
         Files.CheckForFile( 'data',( file ) => {
             data = file;
+            console.log(data)
             mainWindow.webContents.send( 'loaded-data',file )
         })
     })

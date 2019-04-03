@@ -58,6 +58,7 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
         id:'set-timeout',
         callback: ( val ) => {
             data.preferences.shortcutTimeout = val;
+            console.log(data)
             Track( User,'SHORTCUT','TIME CHANGED' )
         }
     },{

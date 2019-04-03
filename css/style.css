@@ -10,6 +10,7 @@ html,body {
     display: flex;
     flex-direction: column;
     font-family: Roboto!important;
+    -webkit-app-region:drag;
 }
 
 .hide {
@@ -26,12 +27,12 @@ html,body {
 }
 
 #note-toggles {
-    box-shadow: 0px 0px 3px 1px rgba(181,181,181,1);
     position: fixed;
     background-color: #FFF;
     right: 0px;
     left: 0px;
     z-index: 999;
+    border-bottom: solid 1px #E5E5E5;
 }
 
 #note-toggles #toggles {
@@ -46,16 +47,15 @@ html,body {
     cursor: pointer;
     border: none;
     outline: none;
-    border-bottom: solid 3px #F2F5FA;
     background-color: #FFF;
 }
 
 #note-toggles #toggles button:hover {
-    border-bottom: solid 2px #EBEEF3;
+    background: #F7F7F7;
 }
 
 #note-toggles #toggles button.selected {
-    border-bottom: solid 2px #489BF6;
+    background: #F0F0F0;
 }
 
 .content {

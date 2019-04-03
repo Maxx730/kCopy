@@ -31,4 +31,12 @@
     margin-top: 52px;
     padding: 10px;
     background-color: #FFF;
+    display: flex;
+}
+
+#clipboard-search i {
+    padding-right: 10px;
+    align-content: center;
+    display: flex;
+    align-items: center;
 }
