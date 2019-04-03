@@ -58,7 +58,6 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
         id:'set-timeout',
         callback: ( val ) => {
             data.preferences.shortcutTimeout = val;
-            console.log(data)
             Track( User,'SHORTCUT','TIME CHANGED' )
         }
     },{
@@ -140,6 +139,7 @@ function RenderClipBoard ( data,search ) {
                     ipcRenderer.send( 'apply-clipboard',event.target.innerText )
                     Toast.ShowToast( 'Saved to Clipboard!',1500 )
                 })
+
                 items.push( item )
             }
         } else {

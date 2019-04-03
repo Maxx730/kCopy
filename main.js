@@ -40,11 +40,8 @@ mainWindow.loadFile('index.html')
 ipcMain.on( 'save-data',( event,args ) => {
     Files.CreateFile( 'data/data.json',args,() => {
         console.log("FILE SUCCESSFULLY SAVED!")
-        Files.CheckForFile( 'data',( file ) => {
-            data = file;
-            console.log(data)
-            mainWindow.webContents.send( 'loaded-data',file )
-        })
+        data = args;
+        mainWindow.webContents.send( 'loaded-data',data )
     })
 })
 
