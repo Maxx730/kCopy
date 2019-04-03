@@ -1,0 +1,56 @@
+{
+  "name": "kCopy",
+  "version": "1.1.0",
+  "description": "Clipboard management tool.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "build"
+  },
+  "repository": "https://github.com/Maxx730/simpl-notes",
+  "author": "John Kinghorn",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "dependencies": {
+    "electron-clipboard-extended": "^1.1.1",
+    "electron-google-analytics": "^0.1.0",
+    "electron-updater": "^4.0.6",
+    "file-type": "^10.10.0",
+    "keyboardevent-from-electron-accelerator": "^1.1.0",
+    "node-storage": "0.0.7",
+    "read-chunk": "^3.2.0",
+    "universal-analytics": "^0.4.20",
+    "update-electron-app": "^1.3.0",
+    "uuid": "^3.3.2"
+  },
+  "build": {
+    "appId": "com.kinghorn.kcopy",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  }
+}

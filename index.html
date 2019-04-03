@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>kCopy</title>
+    <link rel = "stylesheet" href = "css/style.css" type = "text/css"/>
+    <link rel = "stylesheet" href = "css/ui/note-list.css" type = "text/css"/>
+    <link rel = "stylesheet" href = "css/ui/clip-list.css" type = "text/css"/>
+    <link rel = "stylesheet" href = "css/ui/toast.css" type = "text/css"/>
+    <link rel = "stylesheet" href = "css/ui/settings.css" type = "text/css"/>
+    <link rel = "stylesheet" href = "css/bulma.min.css" type = "text/css"/>
+  </head>
+  <body>
+    <script>
+      require('./renderer.js')
+    </script>
+    <div id = "note-toggles">
+        <div id = "toggles">
+            <button id = "notes" class = "toggle hide">Notes</button>
+            <button id = "clipboard" class = "toggle selected">Clipboard</button>
+            <button id = "settings" class = "toggle">Settings</button>
+        </div>
+    </div>
+    <div id = "notes-content" class = "content">
+        <ul id = "note-list">
+            <li class = "note-field">
+                <input type = "text"/>
+            </li>
+        </ul>
+    </div>
+    <div id = "clipboard-content" class = "content focused">
+        <div id = "clipboard-search">
+            <input id="search-clipboard-field" class="input" type="text" placeholder="Search Clipboard">
+        </div>
+        <div id = "clipboard-hint">
+            Click to Copy
+        </div>
+        <ul id = "clipboard-list">
+
+        </ul>
+    </div>
+    <div id = "settings-content" class = "content">
+        <h2>
+            General
+        </h2>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" id="clear-clipboard">Clear Clipboard Memory</button>
+                <subtext>
+                    Clears out all the past clipboard entries, use caution.
+                </subtext>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" id="import-clipboard">Import</button>
+                <button class="button is-link" id="export-clipboard">Export</button>
+                <subtext>
+                    Backup/Restore clipboard and settings.
+                </subtext>
+            </div>
+        </div>
+        <div class = "field">
+            <div class = "control">
+                <h3>
+                    Shortcut Indicator Time (Seconds)
+                </h3>
+                <input class="input" type="number" placeholder="Indicator Timeout" id="shortcutTimeout" value = "5">
+                <subtext>
+                    Sets the amout of time the shortcut indicator shows.
+                </subtext>
+            </div>
+        </div>
+        <div class = "field">
+            <div class = "control">
+                <button class="button is-rounded" id="save-changes" disabled>Save Changes</button>
+            </div>
+        </div>
+        <div id = "latest-updates">
+            <h2>
+                Latest Updates
+            </h2>
+            <ul>
+                <li>
+                    Updated Settings
+                </li>
+                <li>
+                    Added Ctrl+Left/Ctrl+Right shortcut for selecting previous clipboards.
+                </li>
+                <li>
+                    Added Import/Export functionality.
+                </li>
+                <li>
+                    Added timeout setting for how long the shortcut indicator displays.
+                </li>
+            </ul>
+        </div>
+        <center>
+            <div id = "about">
+                <span>Created by John M Kinghorn</span>
+            </div>            
+        </center>
+    </div>
+    <div id = "toast-message" class="closed">
+        <div id = "message-content">
+            Toast Message
+        </div>
+    </div>
+  </body>
+</html>

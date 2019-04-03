@@ -1,0 +1,19 @@
+#toast-message {
+    position: fixed;
+    bottom: -100%;
+    right: 0px;
+    left: 0px;
+    transition: all .25s;
+}
+
+#toast-message.open {
+    bottom: 0px;
+}
+
+#message-content {
+    padding: 15px;
+    background-color: #332F2E;
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 12px;
+}

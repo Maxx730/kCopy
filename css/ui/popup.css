@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../../fonts/roboto/Roboto-Regular.ttf);
+}
+
+html,body {
+    border-radius: 5px;
+    background: transparent;
+    font-family: Roboto;
+    padding-left: 2px;
+    font-size: 12px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#message-content {
+    font-weight: normal;
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
