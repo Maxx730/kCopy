@@ -70,14 +70,17 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
     },{
         id:'setting-input',
         callback: ( target,value ) => {
-            Object.keys( data ).forEach( key => {
-                console.log(key)
+            Object.keys( data.preferences ).forEach( key => {
+                if ( key === target ) {
+                    data.preferences[ key ] = value
+                }
             })
         }
     }]);
 })
 
 ipcRenderer.on('update-message',( event,args ) => {
+    console.log("working")
     document.getElementsByTagName('BODY')[0].innerHTML = " working "
 })
 
@@ -136,7 +139,7 @@ function RenderClipBoard ( data,search ) {
     document.getElementById('clipboard-list').innerHTML = ''
     let items = [];
 
-    for ( let i = data.clipboard.length - 1;i > -1;i-- ) {
+    for ( let i = 0;i < data.clipboard.length;i++ ) {
         if ( search !== undefined) {
             if ( data.clipboard[i].includes( search ) ) {
                 item = document.createElement('LI');

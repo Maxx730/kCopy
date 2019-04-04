@@ -3,7 +3,6 @@ process.env.GH_TOKEN="3d4495070d97e6d3dfd32298954f671ab4725629"
 const Files = require('./lib/data.js')
 const {app, BrowserWindow, ipcMain, globalShortcut, dialog } = require('electron')
 const clipboard = require('electron-clipboard-extended')
-const { toKeyEvent } = require('keyboardevent-from-electron-accelerator');
 const type = require('file-type')
 const buff = require('read-chunk')
 const ua = require('universal-analytics')
@@ -22,7 +21,6 @@ function createWindow ( data ) {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    titleBarStyle:'hidden',
     webPreferences: {
       nodeIntegration: true
     },
@@ -39,7 +37,7 @@ mainWindow.loadFile('index.html')
 
 ipcMain.on( 'save-data',( event,args ) => {
     Files.CreateFile( 'data/data.json',args,() => {
-        console.log("FILE SUCCESSFULLY SAVED!")
+        TrackEvent( user,'FILE','SAVED' )
         data = args;
         mainWindow.webContents.send( 'loaded-data',data )
     })
@@ -208,7 +206,7 @@ app.on('activate', function () {
 //Logic for jumpcut type features.
 clipboard.on('text-changed', () => {
     if ( data !== undefined ) {
-        data.clipboard.push( clipboard.readText() )
+        data.clipboard.unshift( clipboard.readText() )
         Files.CreateFile( 'data/data.json',data,() => {
             mainWindow.webContents.send( 'loaded-data',data )
         })
