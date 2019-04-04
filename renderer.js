@@ -5,11 +5,13 @@ const User = getGlobal('User')
 const UiBuilder = require('./lib/ui-builder.js')
 const Toast = require('./lib/toast.js')
 const uuid = require('uuid')
+const appVersion = require('electron').remote.app.getVersion()
 
 let data;
 let screen = "clipboard";
 
 ipcRenderer.on( 'loaded-data',( event,arg ) => {
+    console.log(appVersion)
     Track( User,'DATA LOADED','LOADED' )
     //Once the data has been loaded we can fill out the data however we want in the ui;
     switch ( screen ) {
@@ -80,8 +82,7 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
 })
 
 ipcRenderer.on('update-message',( event,args ) => {
-    console.log("working")
-    document.getElementsByTagName('BODY')[0].innerHTML = " working "
+    document.getElementsByTagName('BODY')[0].innerHTML = args;
 })
 
 ipcRenderer.on('data-imported',( event,args ) => {

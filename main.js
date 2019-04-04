@@ -1,7 +1,7 @@
 process.env.GH_TOKEN="3d4495070d97e6d3dfd32298954f671ab4725629"
 
 const Files = require('./lib/data.js')
-const {app, BrowserWindow, ipcMain, globalShortcut, dialog } = require('electron')
+const {app, BrowserWindow, ipcMain, globalShortcut, dialog, Menu } = require('electron')
 const clipboard = require('electron-clipboard-extended')
 const type = require('file-type')
 const buff = require('read-chunk')
@@ -118,6 +118,63 @@ autoUpdater.on('update-downloaded', (info) => {
 app.on('ready', () => {
     //First check if there have been any updates before launching the application.
     autoUpdater.checkForUpdatesAndNotify()
+
+    const menu = Menu.buildFromTemplate([
+        {
+           label: 'Edit',
+           submenu: [
+              {
+                 role: 'undo'
+              },
+              {
+                 role: 'redo'
+              },
+              {
+                 type: 'separator'
+              },
+              {
+                 role: 'cut'
+              },
+              {
+                 role: 'copy'
+              },
+              {
+                 role: 'paste'
+              }
+           ]
+        },
+        
+        {
+           label: 'View',
+           submenu: [
+              {
+                 role: 'reload'
+              },
+              {
+                 role: 'toggledevtools'
+              },
+              {
+                 type: 'separator'
+              },
+              {
+                 role: 'resetzoom'
+              },
+              {
+                 role: 'zoomin'
+              },
+              {
+                 role: 'zoomout'
+              },
+              {
+                 type: 'separator'
+              },
+              {
+                 role: 'togglefullscreen'
+              }
+           ]
+        },
+     ]);
+    Menu.setApplicationMenu(menu);
 
     Files.CheckForFile( 'data',( file ) => {
         createWindow( file );
