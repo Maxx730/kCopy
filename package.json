@@ -1,6 +1,6 @@
 {
   "name": "kCopy",
-  "version": "1.0.5",
+  "version": "1.0.6.1",
   "description": "Clipboard management tool.",
   "main": "main.js",
   "scripts": {
