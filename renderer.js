@@ -67,6 +67,13 @@ ipcRenderer.on( 'loaded-data',( event,arg ) => {
             Toast.ShowToast( 'Settings Saved',2500 )
             ipcRenderer.send( 'save-data',data )
         }
+    },{
+        id:'setting-input',
+        callback: ( target,value ) => {
+            Object.keys( data ).forEach( key => {
+                console.log(key)
+            })
+        }
     }]);
 })
 
@@ -135,7 +142,8 @@ function RenderClipBoard ( data,search ) {
                 item = document.createElement('LI');
                 item.classList.add('clip');
                 item.innerText = data.clipboard[i]
-                item.addEventListener('click', ( event ) => {
+                item.addEventListener('click', ( event ) => {   
+                    document.getElementById('search-clipboard-field').value = '';
                     ipcRenderer.send( 'apply-clipboard',event.target.innerText )
                     Toast.ShowToast( 'Saved to Clipboard!',1500 )
                 })
