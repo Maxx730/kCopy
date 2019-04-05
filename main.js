@@ -1,7 +1,7 @@
 process.env.GH_TOKEN="3d4495070d97e6d3dfd32298954f671ab4725629"
 
 const Files = require('./lib/data.js')
-const {app, BrowserWindow, ipcMain, globalShortcut, dialog, Menu } = require('electron')
+const {app, BrowserWindow, ipcMain, globalShortcut, dialog, Menu, net } = require('electron')
 const clipboard = require('electron-clipboard-extended')
 const type = require('file-type')
 const buff = require('read-chunk')
@@ -116,6 +116,15 @@ autoUpdater.on('update-downloaded', (info) => {
 });
 
 app.on('ready', () => {
+
+    let request = net.request('http://www.google.com')
+
+    request.on('response', response => {
+      console.log("working")
+
+      request.end();
+    })
+
     //First check if there have been any updates before launching the application.
     autoUpdater.checkForUpdatesAndNotify()
 

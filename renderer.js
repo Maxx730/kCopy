@@ -1,4 +1,4 @@
-const { ipcRenderer } = require( 'electron' )
+const { ipcRenderer,shell } = require( 'electron' )
 const { getGlobal } = require('electron').remote
 const Track = getGlobal('TrackEvent')
 const User = getGlobal('User')
@@ -10,8 +10,39 @@ const appVersion = require('electron').remote.app.getVersion()
 let data;
 let screen = "clipboard";
 
+const hasUpdate = new Promise( ( resolve,reject ) => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            try {
+                let result = JSON.parse( xhttp.responseText )
+
+                if ( appVersion < result.name ) {
+                    resolve( xhttp.responseText )
+                    //document.getElementById('update-indicator').classList.remove('hide')
+                    //document.getElementById('update-text').innerHTML = "Click <a id='update-link' href = '" + result.url + "'>here</a> to download the latest update."
+                } else {
+                    reject( "APPLICATION UP TO DATE" )
+                }
+            } catch ( error ){
+                reject( "ERROR PARSING JSON DATA" )
+            }
+        }
+    };
+    xhttp.open("GET", "https://api.github.com/repos/Maxx730/kCopy/releases/latest", true);
+    xhttp.send();
+})
+
 ipcRenderer.on( 'loaded-data',( event,arg ) => {
-    console.log(appVersion)
+
+    let test = hasUpdate.then( ( message ) => {
+        Toast.ShowToast( 'New Update Found',1500,{
+            static: true
+        } )
+    } ).catch( ( err ) => {
+        Toast.ShowToast( message,1500 )
+    } )
+
     Track( User,'DATA LOADED','LOADED' )
     //Once the data has been loaded we can fill out the data however we want in the ui;
     switch ( screen ) {

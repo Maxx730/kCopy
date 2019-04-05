@@ -65,3 +65,30 @@ html,body {
 .content.focused {
     display: block;
 }
+
+#update-indicator {
+    font-size: 12px;
+    padding: 8px 0 8px 10px;
+    background-color: #ff3860;
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+#update-indicator i {
+    display: flex;
+    align-self: flex-end;
+}
+
+#update-indicator #update-text {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#update-indicator a {
+    padding: 0 8px 0 8px;
+}
